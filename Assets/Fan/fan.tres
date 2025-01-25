@@ -1,0 +1,39 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://ffnxax42627g"]
+
+[ext_resource type="Texture2D" uid="uid://5x1xi654gjv6" path="res://aseprite/fan-sheet.png" id="1_jabyd"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1c3aw"]
+atlas = ExtResource("1_jabyd")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nfgtl"]
+atlas = ExtResource("1_jabyd")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4hghf"]
+atlas = ExtResource("1_jabyd")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kmj4p"]
+atlas = ExtResource("1_jabyd")
+region = Rect2(192, 0, 64, 64)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1c3aw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nfgtl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4hghf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kmj4p")
+}],
+"loop": true,
+"name": &"fan_spinning",
+"speed": 5.0
+}]

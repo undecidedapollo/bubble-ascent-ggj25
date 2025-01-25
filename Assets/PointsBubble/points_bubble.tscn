@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ldoo3hmqgvr"]
 
-[ext_resource type="Script" path="res://Code/points_bubble.gd" id="1_10nbp"]
+[ext_resource type="Script" path="res://Assets/PointsBubble/points_bubble.gd" id="1_10nbp"]
 [ext_resource type="Texture2D" uid="uid://cphdeqfhp8t74" path="res://aseprite/Sprite-0001.png" id="2_cvkbu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_huo5r"]
@@ -10,6 +10,8 @@ script = ExtResource("1_10nbp")
 points_value = 210
 
 [node name="AreaBody2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaBody2D"]
 scale = Vector2(1.6, 1.6)

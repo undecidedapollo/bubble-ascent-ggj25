@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cvvbwhwhy7i1o"]
+[gd_scene load_steps=3 format=3 uid="uid://cvvbwhwhy7i1o"]
 
 [ext_resource type="Texture2D" uid="uid://jdbeokgr877y" path="res://aseprite/spikes.png" id="1_ll7b8"]
+[ext_resource type="Script" path="res://damage_hitbox.gd" id="2_je0wb"]
 
 [node name="Spikes" type="Node2D" groups=["damage_player"]]
 position = Vector2(16, 8)
@@ -8,7 +9,20 @@ position = Vector2(16, 8)
 [node name="Spikes" type="Sprite2D" parent="."]
 texture = ExtResource("1_ll7b8")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="DamageHitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("2_je0wb")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="DamageHitbox"]
 polygon = PackedVector2Array(-12, 2, -8, 7, -4, 2, 4, 2, 8, 8, 12, 2, 12, 1, -12, 1)
+
+[node name="PhysicsHitbox" type="StaticBody2D" parent="."]
+position = Vector2(0, -6)
+collision_mask = 15
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PhysicsHitbox"]
+polygon = PackedVector2Array(-14, -2, -11, 7, 11, 7, 15, -2)
+disabled = true
+
+[connection signal="body_entered" from="DamageHitbox" to="DamageHitbox" method="_on_body_entered"]

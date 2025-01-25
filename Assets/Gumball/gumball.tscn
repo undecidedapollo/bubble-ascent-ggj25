@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://du6f7jifmoca3"]
+
+[ext_resource type="Script" path="res://Assets/Gumball/gumball.gd" id="1_38084"]
+[ext_resource type="Shader" path="res://Assets/Gumball/gumball.gdshader" id="2_2kr2k"]
+[ext_resource type="Texture2D" uid="uid://kukm5vrc0kg2" path="res://aseprite/gumball.png" id="2_xo5oh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8gjry"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c35uu"]
+resource_local_to_scene = true
+shader = ExtResource("2_2kr2k")
+shader_parameter/tint_color = Color(0.801401, 0.120195, 0.759949, 1)
+
+[node name="Gumball" type="RigidBody2D"]
+collision_layer = 2147483650
+collision_mask = 7
+mass = 0.1
+contact_monitor = true
+max_contacts_reported = 3
+script = ExtResource("1_38084")
+color = Color(0.801401, 0.120195, 0.759949, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.8, 0.8)
+shape = SubResource("CircleShape2D_8gjry")
+
+[node name="Gumball" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_c35uu")
+texture = ExtResource("2_xo5oh")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

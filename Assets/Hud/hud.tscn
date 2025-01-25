@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://kx7mp1vt0lrc"]
+
+[ext_resource type="Script" path="res://Assets/Hud/hud.gd" id="1_xdh68"]
+
+[node name="Hud" type="Node2D"]
+top_level = true
+script = ExtResource("1_xdh68")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="RichTextLabel" parent="CanvasLayer"]
+top_level = true
+clip_contents = false
+offset_right = 645.0
+offset_bottom = 94.0
+theme_override_font_sizes/normal_font_size = 60
+text = "Score: 0"
+autowrap_mode = 0
+
+[node name="BubbleGumLabel" type="RichTextLabel" parent="CanvasLayer"]
+top_level = true
+clip_contents = false
+offset_top = 74.0
+offset_right = 645.0
+offset_bottom = 168.0
+theme_override_font_sizes/normal_font_size = 60
+text = "Gum: 0"
+autowrap_mode = 0

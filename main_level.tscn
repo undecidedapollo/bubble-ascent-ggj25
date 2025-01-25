@@ -1,15 +1,18 @@
 [gd_scene load_steps=16 format=3 uid="uid://cy3jg8jupkl3i"]
 
-[ext_resource type="Texture2D" uid="uid://cphdeqfhp8t74" path="res://aseprite/Sprite-0001.png" id="1_4ox4u"]
 [ext_resource type="Shader" path="res://new_shader.gdshader" id="1_7a1os"]
-[ext_resource type="Script" path="res://Code/bub.gd" id="2_bosh5"]
-[ext_resource type="Texture2D" uid="uid://c3hke2hc2u0q4" path="res://aseprite/wind.png" id="3_y3nqg"]
+[ext_resource type="Script" path="res://Code/Global/TransformListener.gd" id="2_02hep"]
+[ext_resource type="Texture2D" uid="uid://mo56wgdhj34g" path="res://aseprite/cloud.png" id="3_mt5de"]
+[ext_resource type="PackedScene" uid="uid://btb2b1yyaul6o" path="res://Assets/Player/player.tscn" id="4_sukcn"]
 [ext_resource type="Script" path="res://Code/camera_2d.gd" id="5_ictdj"]
 [ext_resource type="Material" uid="uid://bq58lnnralk73" path="res://new_shader_material.tres" id="6_bi16q"]
-[ext_resource type="PackedScene" uid="uid://ldoo3hmqgvr" path="res://points_bubble.tscn" id="7_0tx5t"]
-[ext_resource type="Texture2D" uid="uid://d2vh8v8diplkx" path="res://aseprite/shitperson.png" id="7_x7hca"]
+[ext_resource type="PackedScene" uid="uid://ldoo3hmqgvr" path="res://Assets/PointsBubble/points_bubble.tscn" id="7_0tx5t"]
+[ext_resource type="PackedScene" uid="uid://kx7mp1vt0lrc" path="res://Assets/Hud/hud.tscn" id="7_c67ow"]
+[ext_resource type="PackedScene" uid="uid://bltdj4nw6ndve" path="res://Assets/Bubblegum/bubblegum.tscn" id="8_2nvf1"]
 [ext_resource type="PackedScene" uid="uid://bo24stwjjcle2" path="res://platform.tscn" id="8_po3vp"]
 [ext_resource type="PackedScene" uid="uid://cvvbwhwhy7i1o" path="res://spikes.tscn" id="10_6icru"]
+[ext_resource type="PackedScene" uid="uid://du6f7jifmoca3" path="res://Assets/Gumball/gumball.tscn" id="12_g8jrq"]
+[ext_resource type="PackedScene" uid="uid://6sjp3tqy5fwl" path="res://Assets/Fan/fan.tscn" id="13_jnp1m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8l1w1"]
 shader = ExtResource("1_7a1os")
@@ -31,14 +34,12 @@ gravity = Vector3(0, 0, 0)
 scale_min = 1.5
 scale_max = 2.5
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7yquo"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_huo5r"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l4f1y"]
-
 [node name="MainLevel" type="Node2D"]
 material = SubResource("ShaderMaterial_8l1w1")
+
+[node name="Node" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_02hep")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = ExtResource("6_bi16q")
@@ -48,40 +49,25 @@ offset_bottom = 10000.0
 
 [node name="Wind2" type="GPUParticles2D" parent="."]
 position = Vector2(0, 576)
-amount = 256
+rotation = -0.000425431
 process_material = SubResource("ParticleProcessMaterial_oxa7u")
-texture = ExtResource("3_y3nqg")
+texture = ExtResource("3_mt5de")
 lifetime = 30.0
 preprocess = 20.0
+visibility_rect = Rect2(-2000, -2000, 4000, 4000)
 
-[node name="RigidBody2D" type="RigidBody2D" parent="." groups=["player"]]
-position = Vector2(360, 388)
-mass = 100.0
-physics_material_override = SubResource("PhysicsMaterial_7yquo")
-gravity_scale = 0.1
-lock_rotation = true
-linear_damp = 0.5
-script = ExtResource("2_bosh5")
+[node name="Player" parent="." instance=ExtResource("4_sukcn")]
+position = Vector2(361, 206)
+initial_state = false
 
-[node name="BubbleCollisionShape" type="CollisionShape2D" parent="RigidBody2D"]
-scale = Vector2(1.6, 1.6)
-shape = SubResource("CircleShape2D_huo5r")
-one_way_collision_margin = 0.0
-
-[node name="BubbleSprite" type="Sprite2D" parent="RigidBody2D"]
-texture = ExtResource("1_4ox4u")
-
-[node name="Camera2D" type="Camera2D" parent="RigidBody2D"]
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(1.5, 1.5)
 script = ExtResource("5_ictdj")
 
-[node name="PersonCollisionShape" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource("CapsuleShape2D_l4f1y")
-disabled = true
+[node name="Hud" parent="Player" instance=ExtResource("7_c67ow")]
 
-[node name="PersonSprite" type="Sprite2D" parent="RigidBody2D"]
-visible = false
-texture = ExtResource("7_x7hca")
-offset = Vector2(0, -1)
+[node name="Bubblegum" parent="." instance=ExtResource("8_2nvf1")]
+position = Vector2(459, 210)
 
 [node name="Points Bubble" parent="." instance=ExtResource("7_0tx5t")]
 position = Vector2(360, 100)
@@ -104,3 +90,21 @@ position = Vector2(371, -3)
 
 [node name="Spikes4" parent="." instance=ExtResource("10_6icru")]
 position = Vector2(403, -3)
+
+[node name="Platform2" parent="." instance=ExtResource("8_po3vp")]
+position = Vector2(321, 234)
+
+[node name="Gumball001" parent="." instance=ExtResource("12_g8jrq")]
+position = Vector2(502, 107)
+scale = Vector2(1, 0.989492)
+color = Color(4.81307e-07, 0.624108, 0.523532, 1)
+
+[node name="Gumball002" parent="." instance=ExtResource("12_g8jrq")]
+position = Vector2(494, 190)
+scale = Vector2(1, 0.990692)
+
+[node name="Fan" parent="." instance=ExtResource("13_jnp1m")]
+position = Vector2(511, 233)
+rotation = -0.0624706
+max_reach = 200.0
+speed = 5.0
