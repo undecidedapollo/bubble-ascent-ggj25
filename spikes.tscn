@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvvbwhwhy7i1o"]
+
+[ext_resource type="Texture2D" uid="uid://jdbeokgr877y" path="res://aseprite/spikes.png" id="1_ll7b8"]
+
+[node name="Spikes" type="Node2D" groups=["damage_player"]]
+position = Vector2(16, 8)
+
+[node name="Spikes" type="Sprite2D" parent="."]
+texture = ExtResource("1_ll7b8")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-12, 2, -8, 7, -4, 2, 4, 2, 8, 8, 12, 2, 12, 1, -12, 1)

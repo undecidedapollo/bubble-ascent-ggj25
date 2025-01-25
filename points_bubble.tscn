@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://ldoo3hmqgvr"]
+
+[ext_resource type="Script" path="res://Code/points_bubble.gd" id="1_10nbp"]
+[ext_resource type="Texture2D" uid="uid://cphdeqfhp8t74" path="res://aseprite/Sprite-0001.png" id="2_cvkbu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_huo5r"]
+
+[node name="Points Bubble" type="Node2D"]
+script = ExtResource("1_10nbp")
+points_value = 210
+
+[node name="AreaBody2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaBody2D"]
+scale = Vector2(1.6, 1.6)
+shape = SubResource("CircleShape2D_huo5r")
+one_way_collision_margin = 0.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="AreaBody2D"]
+offset_left = -13.0
+offset_top = -12.0
+offset_right = 27.0
+offset_bottom = 28.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "210"
+
+[node name="Sprite-0001" type="Sprite2D" parent="AreaBody2D"]
+texture = ExtResource("2_cvkbu")
+
+[connection signal="body_entered" from="AreaBody2D" to="." method="_on_body_entered"]

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo24stwjjcle2"]
+
+[ext_resource type="Texture2D" uid="uid://cpw85i3i8kinj" path="res://aseprite/ledge.png" id="1_0nf1m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wu6ek"]
+size = Vector2(256, 64)
+
+[node name="Platform" type="Node2D"]
+
+[node name="Static2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Static2D"]
+position = Vector2(128, 32)
+shape = SubResource("RectangleShape2D_wu6ek")
+
+[node name="Ledge" type="Sprite2D" parent="."]
+position = Vector2(128, 32)
+texture = ExtResource("1_0nf1m")

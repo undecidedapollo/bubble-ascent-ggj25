@@ -1,0 +1,106 @@
+[gd_scene load_steps=16 format=3 uid="uid://cy3jg8jupkl3i"]
+
+[ext_resource type="Texture2D" uid="uid://cphdeqfhp8t74" path="res://aseprite/Sprite-0001.png" id="1_4ox4u"]
+[ext_resource type="Shader" path="res://new_shader.gdshader" id="1_7a1os"]
+[ext_resource type="Script" path="res://Code/bub.gd" id="2_bosh5"]
+[ext_resource type="Texture2D" uid="uid://c3hke2hc2u0q4" path="res://aseprite/wind.png" id="3_y3nqg"]
+[ext_resource type="Script" path="res://Code/camera_2d.gd" id="5_ictdj"]
+[ext_resource type="Material" uid="uid://bq58lnnralk73" path="res://new_shader_material.tres" id="6_bi16q"]
+[ext_resource type="PackedScene" uid="uid://ldoo3hmqgvr" path="res://points_bubble.tscn" id="7_0tx5t"]
+[ext_resource type="Texture2D" uid="uid://d2vh8v8diplkx" path="res://aseprite/shitperson.png" id="7_x7hca"]
+[ext_resource type="PackedScene" uid="uid://bo24stwjjcle2" path="res://platform.tscn" id="8_po3vp"]
+[ext_resource type="PackedScene" uid="uid://cvvbwhwhy7i1o" path="res://spikes.tscn" id="10_6icru"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8l1w1"]
+shader = ExtResource("1_7a1os")
+shader_parameter/color1 = Color(1, 1, 1, 1)
+shader_parameter/color2 = Color(0, 0, 0, 1)
+shader_parameter/size = 50.0
+shader_parameter/camera_offset = Vector2(0, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_oxa7u"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(64, 576, 1)
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+spread = 10.0
+initial_velocity_min = 5.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+scale_min = 1.5
+scale_max = 2.5
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7yquo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_huo5r"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l4f1y"]
+
+[node name="MainLevel" type="Node2D"]
+material = SubResource("ShaderMaterial_8l1w1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = ExtResource("6_bi16q")
+offset_top = -10000.0
+offset_right = 1600.0
+offset_bottom = 10000.0
+
+[node name="Wind2" type="GPUParticles2D" parent="."]
+position = Vector2(0, 576)
+amount = 256
+process_material = SubResource("ParticleProcessMaterial_oxa7u")
+texture = ExtResource("3_y3nqg")
+lifetime = 30.0
+preprocess = 20.0
+
+[node name="RigidBody2D" type="RigidBody2D" parent="." groups=["player"]]
+position = Vector2(360, 388)
+mass = 100.0
+physics_material_override = SubResource("PhysicsMaterial_7yquo")
+gravity_scale = 0.1
+lock_rotation = true
+linear_damp = 0.5
+script = ExtResource("2_bosh5")
+
+[node name="BubbleCollisionShape" type="CollisionShape2D" parent="RigidBody2D"]
+scale = Vector2(1.6, 1.6)
+shape = SubResource("CircleShape2D_huo5r")
+one_way_collision_margin = 0.0
+
+[node name="BubbleSprite" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_4ox4u")
+
+[node name="Camera2D" type="Camera2D" parent="RigidBody2D"]
+script = ExtResource("5_ictdj")
+
+[node name="PersonCollisionShape" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("CapsuleShape2D_l4f1y")
+disabled = true
+
+[node name="PersonSprite" type="Sprite2D" parent="RigidBody2D"]
+visible = false
+texture = ExtResource("7_x7hca")
+offset = Vector2(0, -1)
+
+[node name="Points Bubble" parent="." instance=ExtResource("7_0tx5t")]
+position = Vector2(360, 100)
+
+[node name="Points Bubble2" parent="." instance=ExtResource("7_0tx5t")]
+position = Vector2(360, 50)
+
+[node name="Platform" parent="." instance=ExtResource("8_po3vp")]
+position = Vector2(291, -43)
+scale = Vector2(0.5, 0.5)
+
+[node name="Spikes" parent="." instance=ExtResource("10_6icru")]
+position = Vector2(307, -3)
+
+[node name="Spikes2" parent="." instance=ExtResource("10_6icru")]
+position = Vector2(339, -3)
+
+[node name="Spikes3" parent="." instance=ExtResource("10_6icru")]
+position = Vector2(371, -3)
+
+[node name="Spikes4" parent="." instance=ExtResource("10_6icru")]
+position = Vector2(403, -3)

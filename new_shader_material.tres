@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bq58lnnralk73"]
+
+[ext_resource type="Shader" path="res://new_shader.gdshader" id="1_eks8s"]
+
+[resource]
+shader = ExtResource("1_eks8s")
+shader_parameter/color1 = Color(1, 0.713258, 0.984874, 1)
+shader_parameter/color2 = Color(0.519037, 0.674829, 1, 1)
+shader_parameter/size = 50.0
+shader_parameter/camera_offset = Vector2(0, 0)
