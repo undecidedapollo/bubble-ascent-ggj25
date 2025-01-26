@@ -1,6 +1,8 @@
 @tool
-extends Node2D
+extends RigidBody2D
+class_name Gumball
 @onready var sprite: Sprite2D = $Gumball
+
 @export var color: Color = Color.BLUE:
 	set(value):
 		color = value
@@ -15,3 +17,4 @@ func _on_body_entered(body:Node) -> void:
 	if body.is_in_group("player"):
 		PlayerInventorySystem.add_bubble_gum(1)
 		self.queue_free()
+

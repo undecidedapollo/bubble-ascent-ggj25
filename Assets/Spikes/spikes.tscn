@@ -4,12 +4,13 @@
 [ext_resource type="Script" path="res://damage_hitbox.gd" id="2_je0wb"]
 
 [node name="Spikes" type="Node2D" groups=["damage_player"]]
-position = Vector2(16, 8)
 
 [node name="Spikes" type="Sprite2D" parent="."]
 texture = ExtResource("1_ll7b8")
+flip_v = true
 
 [node name="DamageHitbox" type="Area2D" parent="."]
+rotation = 3.14159
 collision_layer = 8
 collision_mask = 4
 script = ExtResource("2_je0wb")
@@ -18,7 +19,8 @@ script = ExtResource("2_je0wb")
 polygon = PackedVector2Array(-12, 2, -8, 7, -4, 2, 4, 2, 8, 8, 12, 2, 12, 1, -12, 1)
 
 [node name="PhysicsHitbox" type="StaticBody2D" parent="."]
-position = Vector2(0, -6)
+position = Vector2(0, 6)
+rotation = 3.14159
 collision_mask = 15
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PhysicsHitbox"]

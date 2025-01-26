@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://kx7mp1vt0lrc" path="res://Assets/Hud/hud.tscn" id="7_c67ow"]
 [ext_resource type="PackedScene" uid="uid://bltdj4nw6ndve" path="res://Assets/Bubblegum/bubblegum.tscn" id="8_2nvf1"]
 [ext_resource type="PackedScene" uid="uid://bo24stwjjcle2" path="res://platform.tscn" id="8_po3vp"]
-[ext_resource type="PackedScene" uid="uid://cvvbwhwhy7i1o" path="res://spikes.tscn" id="10_6icru"]
+[ext_resource type="PackedScene" uid="uid://cvvbwhwhy7i1o" path="res://Assets/Spikes/spikes.tscn" id="10_6icru"]
 [ext_resource type="PackedScene" uid="uid://du6f7jifmoca3" path="res://Assets/Gumball/gumball.tscn" id="12_g8jrq"]
 [ext_resource type="PackedScene" uid="uid://6sjp3tqy5fwl" path="res://Assets/Fan/fan.tscn" id="13_jnp1m"]
 
@@ -81,21 +81,25 @@ scale = Vector2(0.5, 0.5)
 
 [node name="Spikes" parent="." instance=ExtResource("10_6icru")]
 position = Vector2(307, -3)
+rotation = 3.14295
 
 [node name="Spikes2" parent="." instance=ExtResource("10_6icru")]
 position = Vector2(339, -3)
+rotation = 3.14295
 
 [node name="Spikes3" parent="." instance=ExtResource("10_6icru")]
 position = Vector2(371, -3)
+rotation = 3.14295
 
 [node name="Spikes4" parent="." instance=ExtResource("10_6icru")]
 position = Vector2(403, -3)
+rotation = 3.14295
 
 [node name="Platform2" parent="." instance=ExtResource("8_po3vp")]
 position = Vector2(321, 234)
 
 [node name="Gumball001" parent="." instance=ExtResource("12_g8jrq")]
-position = Vector2(502, 107)
+position = Vector2(409, 197)
 scale = Vector2(1, 0.989492)
 color = Color(4.81307e-07, 0.624108, 0.523532, 1)
 
@@ -104,7 +108,7 @@ position = Vector2(494, 190)
 scale = Vector2(1, 0.990692)
 
 [node name="Fan" parent="." instance=ExtResource("13_jnp1m")]
-position = Vector2(511, 233)
-rotation = -0.0624706
+position = Vector2(607, 274)
+rotation = -1.57899
 max_reach = 200.0
-speed = 5.0
+speed = 10.0

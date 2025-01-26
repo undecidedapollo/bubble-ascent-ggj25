@@ -16,6 +16,21 @@ func use_bubble_gum() -> void:
 		bubble_gum = 0
 	emit_signal("bubble_gum_changed", bubble_gum)
 
+func set_bubble_gum(value: int) -> void:
+	bubble_gum = value
+	emit_signal("bubble_gum_changed", bubble_gum)
+
 func get_bubble_gum() -> int:
 	return bubble_gum
 
+
+var has_hubba_yoyo_internal: bool = false
+
+signal hubayoyo_changed(has_hubba_yoyo: bool)
+
+func has_hubba_yoyo() -> bool:
+	return has_hubba_yoyo_internal
+
+func set_has_hubba_yoyo(value: bool) -> void:
+	has_hubba_yoyo_internal = value
+	emit_signal("hubayoyo_changed", has_hubba_yoyo_internal)

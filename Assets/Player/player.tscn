@@ -1,15 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://btb2b1yyaul6o"]
+[gd_scene load_steps=8 format=3 uid="uid://btb2b1yyaul6o"]
 
 [ext_resource type="Script" path="res://Assets/Player/player.gd" id="1_7fmxq"]
 [ext_resource type="Texture2D" uid="uid://cphdeqfhp8t74" path="res://aseprite/Sprite-0001.png" id="2_s5eay"]
 [ext_resource type="Texture2D" uid="uid://d2vh8v8diplkx" path="res://aseprite/shitperson.png" id="4_1rmcw"]
+[ext_resource type="PackedScene" uid="uid://8l8fi3ax2qeq" path="res://Assets/HubbaYoyo/hubayoyo.tscn" id="4_tpfgb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_7yquo"]
 friction = 0.2
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_huo5r"]
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l4f1y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_huo5r"]
 
 [node name="Player" type="RigidBody2D" groups=["player"]]
 collision_layer = 2147483652
@@ -23,6 +24,15 @@ max_contacts_reported = 5
 linear_damp = 0.5
 script = ExtResource("1_7fmxq")
 
+[node name="PersonCollisionShape" type="CollisionShape2D" parent="."]
+scale = Vector2(0.6, 1)
+shape = SubResource("CapsuleShape2D_l4f1y")
+disabled = true
+
+[node name="PersonSprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_1rmcw")
+offset = Vector2(0, -1)
+
 [node name="BubbleCollisionShape" type="CollisionShape2D" parent="."]
 scale = Vector2(1.6, 1.6)
 shape = SubResource("CircleShape2D_huo5r")
@@ -31,13 +41,8 @@ one_way_collision_margin = 0.0
 [node name="BubbleSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_s5eay")
 
-[node name="PersonCollisionShape" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_l4f1y")
-disabled = true
-
-[node name="PersonSprite" type="Sprite2D" parent="."]
-visible = false
-texture = ExtResource("4_1rmcw")
-offset = Vector2(0, -1)
+[node name="Hubayoyo" parent="." instance=ExtResource("4_tpfgb")]
+position = Vector2(36, -1)
+scale = Vector2(0.25, 0.25)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

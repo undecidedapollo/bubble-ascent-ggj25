@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://kx7mp1vt0lrc"]
+[gd_scene load_steps=3 format=3 uid="uid://kx7mp1vt0lrc"]
 
 [ext_resource type="Script" path="res://Assets/Hud/hud.gd" id="1_xdh68"]
+[ext_resource type="Texture2D" uid="uid://dofy3qyjfh6nm" path="res://aseprite/hubbabubba.png" id="2_olpqo"]
 
 [node name="Hud" type="Node2D"]
 top_level = true
@@ -26,3 +27,7 @@ offset_bottom = 168.0
 theme_override_font_sizes/normal_font_size = 60
 text = "Gum: 0"
 autowrap_mode = 0
+
+[node name="HubbaYoyoSprite" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(37, 183)
+texture = ExtResource("2_olpqo")
