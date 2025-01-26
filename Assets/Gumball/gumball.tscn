@@ -13,7 +13,7 @@ shader_parameter/tint_color = Color(0.801401, 0.120195, 0.759949, 1)
 
 [node name="Gumball" type="RigidBody2D"]
 collision_layer = 2147483650
-collision_mask = 7
+collision_mask = 2147483655
 mass = 0.1
 contact_monitor = true
 max_contacts_reported = 3

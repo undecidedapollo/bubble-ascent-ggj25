@@ -18,16 +18,26 @@ theme_override_font_sizes/normal_font_size = 60
 text = "Score: 0"
 autowrap_mode = 0
 
+[node name="HealthLabel" type="RichTextLabel" parent="CanvasLayer"]
+top_level = true
+clip_contents = false
+offset_top = 75.0
+offset_right = 645.0
+offset_bottom = 169.0
+theme_override_font_sizes/normal_font_size = 60
+text = "Health: 0"
+autowrap_mode = 0
+
 [node name="BubbleGumLabel" type="RichTextLabel" parent="CanvasLayer"]
 top_level = true
 clip_contents = false
-offset_top = 74.0
+offset_top = 154.0
 offset_right = 645.0
-offset_bottom = 168.0
+offset_bottom = 248.0
 theme_override_font_sizes/normal_font_size = 60
 text = "Gum: 0"
 autowrap_mode = 0
 
 [node name="HubbaYoyoSprite" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(37, 183)
+position = Vector2(37, 263)
 texture = ExtResource("2_olpqo")

@@ -1,15 +1,18 @@
-[gd_scene load_steps=12 format=3 uid="uid://y6y15auebaue"]
+[gd_scene load_steps=15 format=3 uid="uid://y6y15auebaue"]
 
 [ext_resource type="Script" path="res://Code/Global/TransformListener.gd" id="1_de0vp"]
 [ext_resource type="Script" path="res://Assets/Levels/Tutorial/tutorial.gd" id="1_i3gf4"]
 [ext_resource type="PackedScene" uid="uid://btb2b1yyaul6o" path="res://Assets/Player/player.tscn" id="2_y5e70"]
 [ext_resource type="Script" path="res://Code/camera_2d.gd" id="3_fudyo"]
+[ext_resource type="Script" path="res://Assets/Levels/Tutorial/color_rect.gd" id="4_7o7v3"]
 [ext_resource type="PackedScene" uid="uid://kx7mp1vt0lrc" path="res://Assets/Hud/hud.tscn" id="4_asu40"]
 [ext_resource type="PackedScene" uid="uid://cvvbwhwhy7i1o" path="res://Assets/Spikes/spikes.tscn" id="6_vnexj"]
 [ext_resource type="PackedScene" uid="uid://bo24stwjjcle2" path="res://platform.tscn" id="7_ffdsa"]
+[ext_resource type="Script" path="res://Assets/Levels/Tutorial/fight_scene.gd" id="8_ctx22"]
 [ext_resource type="PackedScene" uid="uid://cgffe5fe6qvm0" path="res://Assets/HubbaYoyo/hubayoyo_collectable.tscn" id="8_ehhpa"]
 [ext_resource type="PackedScene" uid="uid://bltdj4nw6ndve" path="res://Assets/Bubblegum/bubblegum.tscn" id="9_fyju7"]
 [ext_resource type="Script" path="res://Assets/Levels/Tutorial/verticality.gd" id="9_tjmmm"]
+[ext_resource type="PackedScene" uid="uid://j3odn6l30nx4" path="res://Assets/BLC/blc.tscn" id="11_dhrsm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5ai2"]
 size = Vector2(37.7, 21.7)
@@ -22,7 +25,7 @@ process_mode = 3
 script = ExtResource("1_de0vp")
 
 [node name="Player" parent="." instance=ExtResource("2_y5e70")]
-position = Vector2(2706.88, -226.663)
+position = Vector2(359.394, 184.223)
 initial_state = false
 
 [node name="ColorRect" type="ColorRect" parent="Player"]
@@ -32,6 +35,7 @@ offset_top = -576.0
 offset_right = 324.0
 offset_bottom = 576.0
 color = Color(0.529412, 0.807843, 0.921569, 1)
+script = ExtResource("4_7o7v3")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(1.5, 1.5)
@@ -88,14 +92,6 @@ scale = Vector2(1.5, 0.5)
 position = Vector2(1765, -152)
 scale = Vector2(1.5, 0.5)
 
-[node name="Platform14" parent="." instance=ExtResource("7_ffdsa")]
-position = Vector2(2149, -152)
-scale = Vector2(1.5, 0.5)
-
-[node name="Platform15" parent="." instance=ExtResource("7_ffdsa")]
-position = Vector2(2533, -152)
-scale = Vector2(1.5, 0.5)
-
 [node name="DMoveRight" type="RichTextLabel" parent="."]
 clip_contents = false
 offset_left = 344.75
@@ -143,27 +139,63 @@ text = "Hanging on too long will
      cause you to slip"
 autowrap_mode = 0
 
-[node name="UseTapeRope" type="RichTextLabel" parent="."]
-clip_contents = false
-offset_left = 2455.0
-offset_top = -350.0
-offset_right = 2636.0
-offset_bottom = -297.0
-text = " Use Tape Rope for
-short range attacks"
-autowrap_mode = 0
-
 [node name="Spikes" parent="." instance=ExtResource("6_vnexj")]
 position = Vector2(811, 241)
 
 [node name="Spikes2" parent="." instance=ExtResource("6_vnexj")]
 position = Vector2(843, 241)
 
-[node name="HubayoyoCollectable" parent="." instance=ExtResource("8_ehhpa")]
-position = Vector2(2534, -227)
+[node name="FightScene" type="Node2D" parent="."]
+script = ExtResource("8_ctx22")
+
+[node name="UseTapeRope" type="RichTextLabel" parent="FightScene"]
+clip_contents = false
+offset_left = 2607.0
+offset_top = -369.0
+offset_right = 2788.0
+offset_bottom = -316.0
+text = " Use Tape Rope for
+short range attacks"
+autowrap_mode = 0
+
+[node name="HubayoyoCollectable" parent="FightScene" instance=ExtResource("8_ehhpa")]
+position = Vector2(2686, -246)
+
+[node name="Platform14" parent="FightScene" instance=ExtResource("7_ffdsa")]
+position = Vector2(2149, -152)
+scale = Vector2(1.5, 0.5)
+
+[node name="Platform15" parent="FightScene" instance=ExtResource("7_ffdsa")]
+position = Vector2(2533, -152)
+scale = Vector2(1.5, 0.5)
+
+[node name="Platform16" parent="FightScene" instance=ExtResource("7_ffdsa")]
+position = Vector2(2917, -152)
+scale = Vector2(1.5, 0.5)
+
+[node name="Platform18" parent="FightScene" instance=ExtResource("7_ffdsa")]
+position = Vector2(3301, -152)
+scale = Vector2(1.5, 0.5)
+
+[node name="LeftWall" parent="FightScene" instance=ExtResource("7_ffdsa")]
+position = Vector2(2533, -792)
+rotation = 1.5708
+scale = Vector2(2.5, 0.5)
+
+[node name="RightWall" parent="FightScene" instance=ExtResource("7_ffdsa")]
+position = Vector2(3333, -792)
+rotation = 1.5708
+scale = Vector2(2.5, 0.5)
+
+[node name="JawbreakerSpawnPoint" type="Node2D" parent="FightScene"]
+position = Vector2(2925, -615)
 
 [node name="Verticality" type="Node2D" parent="."]
+position = Vector2(768, 0)
 script = ExtResource("9_tjmmm")
+
+[node name="GumballSpawn" type="Node2D" parent="Verticality"]
+position = Vector2(3103, -531)
 
 [node name="TriggerVerticality" type="Area2D" parent="Verticality"]
 position = Vector2(3094, -237)
@@ -190,7 +222,7 @@ clip_contents = false
 offset_left = 3014.0
 offset_top = -567.0
 offset_right = 3195.0
-offset_bottom = -514.0
+offset_bottom = -436.0
 bbcode_enabled = true
 text = "[center]Collect Gumballs[/center]"
 
@@ -313,5 +345,47 @@ rotation = 3.14159
 
 [node name="FanSection" type="Node2D" parent="."]
 
+[node name="EndOfScene" type="Node2D" parent="."]
+position = Vector2(530, -221)
+
+[node name="Platform1" parent="EndOfScene" instance=ExtResource("7_ffdsa")]
+position = Vector2(4689, -395)
+scale = Vector2(1.62, 0.5)
+
+[node name="Platform3" parent="EndOfScene" instance=ExtResource("7_ffdsa")]
+position = Vector2(5135, -747)
+rotation = 1.5708
+scale = Vector2(1.5, 0.5)
+
+[node name="Platform4" parent="EndOfScene" instance=ExtResource("7_ffdsa")]
+position = Vector2(4719, -747)
+rotation = 1.5708
+scale = Vector2(0.953, 0.5)
+
+[node name="Platform2" parent="EndOfScene" instance=ExtResource("7_ffdsa")]
+position = Vector2(4719, -747)
+scale = Vector2(1.5, 0.5)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="EndOfScene"]
+offset_left = 4801.0
+offset_top = -665.0
+offset_right = 5034.0
+offset_bottom = -579.0
+bbcode_enabled = true
+text = "[center]Congratulations[/center]"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="EndOfScene"]
+offset_left = 4800.0
+offset_top = -607.0
+offset_right = 5047.0
+offset_bottom = -521.0
+bbcode_enabled = true
+text = "[center]You're in the Big Leagues now! Collect your chew
+to continue[/center]"
+
+[node name="Blc" parent="EndOfScene" instance=ExtResource("11_dhrsm")]
+position = Vector2(4921, -452)
+
 [connection signal="body_entered" from="Verticality/TriggerVerticality" to="Verticality" method="_on_trigger_verticality_body_entered"]
 [connection signal="body_entered" from="Verticality/TriggerPostVerticality" to="Verticality" method="_on_trigger_post_verticality_body_entered"]
+[connection signal="blc_collected" from="EndOfScene/Blc" to="." method="_on_blc_collected"]

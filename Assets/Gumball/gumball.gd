@@ -10,7 +10,6 @@ class_name Gumball
 			sprite.material.set_shader_parameter("tint_color", color)
 
 func _ready():
-	print("Color: ", color)
 	sprite.material.set_shader_parameter("tint_color", color)
 
 func _on_body_entered(body:Node) -> void:

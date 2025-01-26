@@ -84,7 +84,7 @@ func _process(delta: float) -> void:
 	last_jump_action += delta
 	if touching_wall != Vector2.ZERO and !isBubbleState:
 		time_touching_wall += delta
-		var friction = compute_friction(time_touching_wall, friction_person, 0, 1.7, 4.0)
+		var friction = compute_friction(time_touching_wall, friction_person, 0.01, 1.7, 4.0)
 		self.physics_material_override.friction = friction
 		self.modulate.a = max(0.5, friction + (1 - friction_person))
 		# print("Friction: ", self.physics_material_override.friction, " | Time: ", time_touching_wall)
@@ -151,13 +151,18 @@ func _process(delta: float) -> void:
 			hubayoyo.position.x = 24 - 64
 
 
-func take_damage(damage: int) -> void:
+func take_damage(damage: int, eject_direction: Vector2 = Vector2.ZERO) -> void:
+	var launch_amount = 40000
 	if immunity_time > 0:
+		if !self.isBubbleState and immunity_time < 0.2: # Don't immediately launch if immunity time is recent otherwise you may launch twice
+			self.apply_central_impulse(eject_direction * launch_amount)
 		return;
+	immunity_time = 1.0
 	if self.isBubbleState:
-		immunity_time = 1.0
 		toggle_bubble_state(false, false)
-	print("Damage taken: " + str(damage))
+	else:
+		self.apply_central_impulse(eject_direction * launch_amount)
+		PlayerInventorySystem.take_damage(damage)
 
 # Enum for different directions
 enum DIRECTION {
@@ -198,30 +203,29 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	var set_touching_wall = false;
 	for i in range(state.get_contact_count()):
 		var contant_node = state.get_contact_collider_object(i)
-		if not contant_node.is_in_group("platform"):
-			continue
+		if contant_node.is_in_group("platform"):
+			var contact_normal = state.get_contact_local_normal(i)
+			var direction = classify_direction(contact_normal)
 
-
-		var contact_normal = state.get_contact_local_normal(i)
-		var direction = classify_direction(contact_normal)
-
-		if direction == Vector2.UP:
-			pass
-		elif direction == Vector2.DOWN:
-			if self.last_jump_action > 0.1:
-				self.jumpsSinceLastGroundTouch = 0
-				self.time_touching_wall = 0
-		elif direction == Vector2.LEFT:
-			# print("Collided with the right side of a platform")
-			set_touching_wall = true;
-			self.set_deferred("touching_wall", Vector2.LEFT)
-		elif direction == Vector2.RIGHT:
-			set_touching_wall = true;
-			self.set_deferred("touching_wall", Vector2.RIGHT)
-			# print("Collided with the left side of a platform")
-		else:
-			print("Collided at an angle: ", direction)
-
+			if direction == Vector2.UP:
+				pass
+			elif direction == Vector2.DOWN:
+				if self.last_jump_action > 0.1:
+					self.jumpsSinceLastGroundTouch = 0
+					self.time_touching_wall = 0
+			elif direction == Vector2.LEFT:
+				# print("Collided with the right side of a platform")
+				set_touching_wall = true;
+				self.set_deferred("touching_wall", Vector2.LEFT)
+			elif direction == Vector2.RIGHT:
+				set_touching_wall = true;
+				self.set_deferred("touching_wall", Vector2.RIGHT)
+				# print("Collided with the left side of a platform")
+			else:
+				print("Collided at an angle: ", direction)
+		if contant_node.is_in_group("enemy"):
+			var contact_normal = state.get_contact_local_normal(i)
+			self.take_damage(10, contact_normal)
 	if not set_touching_wall and touching_wall != Vector2.ZERO:
 		self.set_deferred("touching_wall", Vector2.ZERO)
 

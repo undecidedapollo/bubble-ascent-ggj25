@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://j3odn6l30nx4"]
+
+[ext_resource type="Texture2D" uid="uid://cmfvlixk40dhr" path="res://aseprite/bigleaguechew.png" id="1_d3vx2"]
+[ext_resource type="Script" path="res://Assets/BLC/blc.gd" id="1_igvaq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_swc2x"]
+size = Vector2(64, 64)
+
+[node name="Blc" type="Node2D"]
+script = ExtResource("1_igvaq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_d3vx2")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_swc2x")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
