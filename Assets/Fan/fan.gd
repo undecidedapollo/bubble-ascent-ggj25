@@ -82,10 +82,10 @@ func _process(delta: float) -> void:
 		var wind_affect = max(0.0, 1.0 - pow(normalized_distance, 8))
 
 		var base_wind_impulse_per_kg = 1
-		var base_wind_impulse = base_wind_impulse_per_kg * body.mass
-		var difference_from_grav_affect = 1 - body.gravity_scale / 4
-		var speed_based_impulse = base_wind_impulse * speed * difference_from_grav_affect * wind_affect
-		body.apply_central_impulse(Vector2.RIGHT.rotated(body.rotation) * speed_based_impulse)
+		var base_wind_impulse = max(base_wind_impulse_per_kg * body.mass, 1)
+		var difference_from_grav_affect = 1 - body.gravity_scale / 2
+		var speed_based_impulse = base_wind_impulse * speed * difference_from_grav_affect * wind_affect * 10
+		body.apply_central_impulse(Vector2.UP.rotated(body.rotation) * speed_based_impulse * delta)
 
 
 	pass
@@ -94,6 +94,7 @@ var captured_objects: Array[RigidBody2D] = []
 
 func _on_wind_area_body_entered(body:Node2D) -> void:
 	if body is RigidBody2D:
+		print("Wind area body entered: ", body.name)
 		captured_objects.append(body)
 	pass # Replace with function body.
 

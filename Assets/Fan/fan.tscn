@@ -8,9 +8,9 @@
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jeses"]
 particle_flag_disable_z = true
-angle_min = 3.5793
-angle_max = 3.5793
-spread = 4.28915
+angle_min = 90.0
+angle_max = 90.0
+spread = 2.45403
 initial_velocity_min = 100.0
 initial_velocity_max = 100.0
 gravity = Vector3(0, 0, 0)
@@ -36,7 +36,8 @@ rotation = -0.00148797
 amount = 32
 process_material = SubResource("ParticleProcessMaterial_jeses")
 texture = ExtResource("3_hr0d1")
-lifetime = 2.0
+lifetime = 20.0
+visibility_rect = Rect2(-100, -100, 400, 100)
 
 [connection signal="body_entered" from="WindArea" to="." method="_on_wind_area_body_entered"]
 [connection signal="body_exited" from="WindArea" to="." method="_on_wind_area_body_exited"]

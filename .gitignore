@@ -2,5 +2,4 @@
 .godot/
 /android/
 .DS_Store
-Bubble Ascent.app/
-web/
+exports/

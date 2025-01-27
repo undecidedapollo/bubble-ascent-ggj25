@@ -4,6 +4,9 @@ extends RigidBody2D
 @onready var bubbleSprite: Sprite2D = $BubbleSprite
 @onready var personCollider: CollisionShape2D = $PersonCollisionShape
 @onready var personSprite: Sprite2D = $PersonSprite
+@onready var playerSpawn: Node2D = $"../PlayerSpawn"
+@onready var yoyoSpawn: Node2D = $"../YoyoSpawn"
+
 var isBubbleState: bool = true
 var jumpsSinceLastGroundTouch: int = 0
 @export var numberOfJumps: int = 2
@@ -96,7 +99,7 @@ func _process(delta: float) -> void:
 
 	if self.isBubbleState and (InputDetection.is_pressed("Jump") or InputDetection.is_pressed("MoveUp")):
 		if self.linear_velocity.y > -400:
-			self.apply_central_impulse(Vector2(0, -500))
+			self.apply_central_impulse(Vector2(0, -25000) * delta)
 	
 	if !self.isBubbleState and (Input.is_action_just_pressed("Jump") or Input.is_action_just_pressed("MoveUp")): 
 			# Determine movement direction
@@ -133,14 +136,14 @@ func _process(delta: float) -> void:
 			self.apply_central_impulse(jump_impulse)
 	else:
 		# Movement handling
-		var impulse = 2000 if isBubbleState else 1200
+		var impulse = 200000 if isBubbleState else 160000
 		var max_speed = 300 if isBubbleState else 250
 		if InputDetection.is_pressed("MoveLeft") and self.linear_velocity.x >= -max_speed:
 			last_input_direction_is_right = false
-			self.apply_central_impulse(Vector2(-impulse, 0))
+			self.apply_central_impulse(Vector2(-impulse, 0) * delta)
 		elif InputDetection.is_pressed("MoveRight") and self.linear_velocity.x <= max_speed:
 			last_input_direction_is_right = true
-			self.apply_central_impulse(Vector2(impulse, 0))
+			self.apply_central_impulse(Vector2(impulse, 0) * delta)
 
 	if Input.is_action_just_pressed("Attack") and PlayerInventorySystem.has_hubba_yoyo():
 		print("Attack")
@@ -200,6 +203,27 @@ func classify_direction(contact_normal: Vector2) -> Vector2:
 
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	var move_player_to_spawn = false
+	if self.global_position.x < 0:
+		move_player_to_spawn = true
+	if self.global_position.x > 6000:
+		move_player_to_spawn = true
+	if self.global_position.y > 1000:
+		move_player_to_spawn = true
+	if self.global_position.y < -2000 and self.isBubbleState:
+		self.toggle_bubble_state(false)
+		self.call_deferred("take_damage", 0)
+		return
+	if move_player_to_spawn:
+		if PlayerInventorySystem.has_hubba_yoyo():
+			self.global_position = yoyoSpawn.global_position
+		else:
+			self.global_position = playerSpawn.global_position
+		self.linear_velocity = Vector2.ZERO
+		self.call_deferred("take_damage", 10)
+		return
+
+
 	var set_touching_wall = false;
 	for i in range(state.get_contact_count()):
 		var contant_node = state.get_contact_collider_object(i)

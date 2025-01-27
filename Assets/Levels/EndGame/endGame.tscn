@@ -1,0 +1,164 @@
+[gd_scene load_steps=10 format=3 uid="uid://okkcf0us6b77"]
+
+[ext_resource type="PackedScene" uid="uid://btb2b1yyaul6o" path="res://Assets/Player/player.tscn" id="1_edql5"]
+[ext_resource type="Script" path="res://Assets/Levels/EndGame/end_game.gd" id="1_ekojm"]
+[ext_resource type="Script" path="res://Assets/Levels/Tutorial/color_rect.gd" id="2_lxoyq"]
+[ext_resource type="Script" path="res://Code/Global/TransformListener.gd" id="2_ni6cm"]
+[ext_resource type="Script" path="res://Code/camera_2d.gd" id="3_odqfa"]
+[ext_resource type="PackedScene" uid="uid://bo24stwjjcle2" path="res://platform.tscn" id="4_1wx5w"]
+[ext_resource type="PackedScene" uid="uid://kx7mp1vt0lrc" path="res://Assets/Hud/hud.tscn" id="6_4wttx"]
+[ext_resource type="PackedScene" uid="uid://6sjp3tqy5fwl" path="res://Assets/Fan/fan.tscn" id="6_yx70k"]
+[ext_resource type="Script" path="res://Assets/Levels/EndGame/gumdrop_spawner.gd" id="8_hjwcg"]
+
+[node name="EndGame" type="Node2D"]
+script = ExtResource("1_ekojm")
+
+[node name="Node" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_ni6cm")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("1_edql5")]
+position = Vector2(351.445, 189.427)
+
+[node name="ColorRect" type="ColorRect" parent="Player"]
+z_index = -100
+offset_left = -324.0
+offset_top = -576.0
+offset_right = 324.0
+offset_bottom = 576.0
+color = Color(0.529412, 0.807843, 0.921569, 1)
+script = ExtResource("2_lxoyq")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(1.5, 1.5)
+script = ExtResource("3_odqfa")
+
+[node name="Hud" parent="Player" instance=ExtResource("6_4wttx")]
+
+[node name="RightWall" parent="." instance=ExtResource("4_1wx5w")]
+position = Vector2(170, -0.999985)
+rotation = 1.5708
+scale = Vector2(2.5, 0.5)
+
+[node name="RightWall4" parent="." instance=ExtResource("4_1wx5w")]
+position = Vector2(841, 0)
+rotation = 1.5708
+scale = Vector2(2.5, 0.5)
+
+[node name="RightWall2" parent="." instance=ExtResource("4_1wx5w")]
+position = Vector2(170, 0)
+scale = Vector2(2.5, 0.5)
+
+[node name="RightWall3" parent="." instance=ExtResource("4_1wx5w")]
+position = Vector2(170, 607)
+scale = Vector2(2.5, 0.5)
+
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2(276.048, 95.5195)
+
+[node name="YoyoSpawn" type="Node2D" parent="."]
+position = Vector2(276.048, 95.5195)
+
+[node name="GumballSpawn" type="Node2D" parent="."]
+position = Vector2(508, 76)
+script = ExtResource("8_hjwcg")
+
+[node name="Fans" type="Node2D" parent="."]
+position = Vector2(204, 620)
+
+[node name="Fan" parent="Fans" instance=ExtResource("6_yx70k")]
+position = Vector2(13, 4)
+rotation = -1.5708
+max_reach = 350.0
+speed = 10.0
+
+[node name="Fan2" parent="Fans" instance=ExtResource("6_yx70k")]
+position = Vector2(73, 4)
+rotation = -1.5708
+max_reach = 350.0
+speed = 10.0
+
+[node name="Fan3" parent="Fans" instance=ExtResource("6_yx70k")]
+position = Vector2(133, 4)
+rotation = -1.5708
+max_reach = 350.0
+speed = 10.0
+
+[node name="Fan4" parent="Fans" instance=ExtResource("6_yx70k")]
+position = Vector2(193, 4)
+rotation = -1.5708
+max_reach = 350.0
+speed = 10.0
+
+[node name="Fan5" parent="Fans" instance=ExtResource("6_yx70k")]
+position = Vector2(253, 4)
+rotation = -1.5708
+max_reach = 350.0
+speed = 10.0
+
+[node name="Fan6" parent="Fans" instance=ExtResource("6_yx70k")]
+position = Vector2(313, 4)
+rotation = -1.5708
+max_reach = 350.0
+speed = 10.0
+
+[node name="Fan7" parent="Fans" instance=ExtResource("6_yx70k")]
+position = Vector2(373, 4)
+rotation = -1.5708
+max_reach = 350.0
+speed = 10.0
+
+[node name="Fan8" parent="Fans" instance=ExtResource("6_yx70k")]
+position = Vector2(433, 4)
+rotation = -1.5708
+max_reach = 350.0
+speed = 10.0
+
+[node name="Fan9" parent="Fans" instance=ExtResource("6_yx70k")]
+position = Vector2(493, 4)
+rotation = -1.5708
+max_reach = 350.0
+speed = 10.0
+
+[node name="Fan10" parent="Fans" instance=ExtResource("6_yx70k")]
+position = Vector2(553, 4)
+rotation = -1.5708
+max_reach = 350.0
+speed = 10.0
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Node2D"]
+offset_left = 348.0
+offset_top = 130.0
+offset_right = 701.0
+offset_bottom = 305.0
+bbcode_enabled = true
+text = "[center]Thanks for playing![/center]"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Node2D"]
+offset_left = 348.0
+offset_top = 172.0
+offset_right = 701.0
+offset_bottom = 347.0
+bbcode_enabled = true
+text = "[center]This is all I had time to build[/center]"
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="Node2D"]
+offset_left = 348.0
+offset_top = 204.0
+offset_right = 701.0
+offset_bottom = 379.0
+bbcode_enabled = true
+text = "[center]Click below to go back to the tutorial level[/center]"
+
+[node name="Button" type="Button" parent="Node2D"]
+offset_left = 481.0
+offset_top = 239.0
+offset_right = 569.0
+offset_bottom = 270.0
+text = "Start Over"
+
+[connection signal="pressed" from="Node2D/Button" to="." method="_on_button_pressed"]

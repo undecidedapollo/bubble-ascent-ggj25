@@ -24,8 +24,14 @@ script = ExtResource("1_i3gf4")
 process_mode = 3
 script = ExtResource("1_de0vp")
 
+[node name="PlayerSpawn" type="Node2D" parent="."]
+position = Vector2(351.445, 189.427)
+
+[node name="YoyoSpawn" type="Node2D" parent="."]
+position = Vector2(2684, -298)
+
 [node name="Player" parent="." instance=ExtResource("2_y5e70")]
-position = Vector2(359.394, 184.223)
+position = Vector2(351.445, 189.427)
 initial_state = false
 
 [node name="ColorRect" type="ColorRect" parent="Player"]
